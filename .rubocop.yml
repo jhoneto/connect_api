@@ -1,0 +1,24 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rspec_rails
+
+AllCops:
+  Exclude:
+    - "config/**/*"
+    - "db/**/*"
+    - "bin/**/*"
+
+Rails:
+  StyleGuideBaseURL: https://rails.rubystyle.guide
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 25
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
