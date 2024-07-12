@@ -12,6 +12,7 @@ class Channel < ApplicationRecord
   validates :provider, presence: true
   validates :channel_type, presence: true
   validates :callback_url, presence: true
+  validates :callback_method, presence: true
 
   before_create :generate_uuid
 

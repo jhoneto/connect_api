@@ -6,6 +6,7 @@ FactoryBot.define do
     provider { 'facebook' }
     channel_type { 'whatsapp' }
     callback_url { 'https://example.com' }
+    callback_method { 'POST' }
     organization
   end
 end

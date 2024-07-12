@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_12_182854) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_12_184716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,13 +18,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_182854) do
     t.bigint "organization_id", null: false
     t.string "name", null: false
     t.string "uuid", null: false
+    t.string "callback_method", null: false
     t.string "callback_url"
+    t.jsonb "callback_headers", default: {}, null: false
     t.string "provider", null: false
     t.string "channel_type", null: false
     t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_channels_on_organization_id"
+  end
+
+  create_table "incoming_messages", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.string "provider", null: false
+    t.string "channel_type", null: false
+    t.jsonb "payload", null: false
+    t.jsonb "channel_infos", null: false
+    t.text "last_error"
+    t.boolean "proccessed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_incoming_messages_on_organization_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -138,6 +153,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_182854) do
   end
 
   add_foreign_key "channels", "organizations"
+  add_foreign_key "incoming_messages", "organizations"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

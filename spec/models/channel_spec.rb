@@ -8,6 +8,7 @@ RSpec.describe Channel, type: :model do
     it { is_expected.to validate_presence_of(:provider) }
     it { is_expected.to validate_presence_of(:channel_type) }
     it { is_expected.to validate_presence_of(:callback_url) }
+    it { is_expected.to validate_presence_of(:callback_method) }
   end
 
   describe 'enums' do
