@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_12_184716) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_22_180853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -152,6 +152,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_184716) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "content", null: false
+    t.string "status", default: "draft", null: false
+    t.string "channel_code"
+    t.string "callback_method", null: false
+    t.string "callback_url", null: false
+    t.jsonb "callback_headers", default: {}, null: false
+    t.bigint "channel_id", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_templates_on_channel_id"
+    t.index ["organization_id"], name: "index_templates_on_organization_id"
+  end
+
   add_foreign_key "channels", "organizations"
   add_foreign_key "incoming_messages", "organizations"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
@@ -160,4 +176,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_184716) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "templates", "channels"
+  add_foreign_key "templates", "organizations"
 end
