@@ -7,4 +7,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  namespace :api do
+    namespace :v1 do
+      namespace :webhook do
+        resources :facebook_whatsapp, only: %i[ index create ]
+      end
+    end
+  end
 end
