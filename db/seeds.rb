@@ -22,7 +22,7 @@ Channel.create!(
   callback_headers: { 'Content-Type' => 'application/json' },
   provider: 'facebook',
   channel_type: 'whatsapp',
-  config: { 'facebook_api_token' => 'EAALCdFq7IWIBOZBTAbKjfNCHqSQNfVY0N7BZBQY2QKUtUDoWEniZBFUZAXK7ourNZBcSZBnTuLZAeDND4giBuN4Mx3fvap1fDBH3QBMIjjAbH3zaEXygoBsPWfyuF5gXjgrUtZBl8aqrNaZA3p86fmQuGj4vB2lk4CMLfgvs0I39tR5UlM6pNZAGFWgS7K6zvlM0m7g1Alp7ZAETfqP4ScE3i95SdPZA0Kw9',
+  config: { 'facebook_api_token' => 'EAALCdFq7IWIBO3fTrbkDEj6ZCgpno9YeOG0emmvaYvMkp2f8eSPAzTC9j9jmHZCgcA3ESGUmU3dgy8U86WC0bWYNeTZA2sZC9EhwQ5t4xv6u94hjZBjClK5P7VJJXMokbmuPWv3MuzLOs4ZAFlXbuoo99LWRapvbzPAHZA5EJasqkuXo4mRmGfGsEyZBAVaAkMSRq830sHJSBUVNh4dRjLjnTX3OP74ZD',
             'facebook_whatsapp_number' => '220835044450225'
           }
 )
@@ -36,7 +36,7 @@ Template.create!(
            Confirma sua consulta no {{3}} as {{4}}.
           ],
   status: 'active',
-  channel_code: 'confirmacao_de_consulta',
+  channel_code: 'confirmacao_consulta_completo',
   callback_method: 'post',
   callback_url: 'https://webhook.site/#!/view/9a196a38-a305-4725-b097-368bb8e8e4f9',
   callback_headers: { 'Content-Type' => 'application/json' },

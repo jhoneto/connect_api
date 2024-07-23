@@ -78,6 +78,8 @@ group :test do
 end
 
 # gem 'devise', '~> 4.9', '>= 4.9.4'
+gem 'dry-struct', '~> 1.6'
+gem 'httparty', '~> 0.22.0'
 gem 'rubocop', '~> 1.63', '>= 1.63.1', require: false
 gem 'rubocop-rails', '~> 2.24', '>= 2.24.1', require: false
 gem 'rubocop-rspec', '~> 2.29', '>= 2.29.1', require: false
