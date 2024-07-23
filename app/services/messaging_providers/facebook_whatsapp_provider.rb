@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class MessagingProviders::FacebookWhatsappProvider < MessagingProviders::BaseProvider
   URL = 'https://graph.facebook.com/v17.0'
   def send_message_from_template(template_message)
@@ -10,7 +11,7 @@ class MessagingProviders::FacebookWhatsappProvider < MessagingProviders::BasePro
       body: template_body(template_message).to_json
     }
 
-    response = HTTParty.post(
+    HTTParty.post(
       "#{URL}/#{@config[:facebook_whatsapp_number]}/messages",
       req_body
     )

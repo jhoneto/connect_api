@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IncomingMessage < ApplicationRecord
   belongs_to :organization
 

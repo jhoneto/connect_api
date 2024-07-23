@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class MessagingProviders::BaseProvider
   def initialize(provider:, channel_type:, config:)
     @provider = provider
@@ -9,5 +10,4 @@ class MessagingProviders::BaseProvider
   def send_message_from_template(params)
     raise NotImplementedError
   end
-
 end
