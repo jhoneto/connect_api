@@ -15,4 +15,14 @@ RSpec.describe Template, type: :model do
     it { is_expected.to validate_presence_of(:callback_method) }
     it { is_expected.to validate_presence_of(:callback_url) }
   end
+
+  describe 'callbacks' do
+    describe 'before_create' do
+      let(:template) { create(:template) }
+
+      it 'generates a uuid' do
+        expect(template.uuid).to be_present
+      end
+    end
+  end
 end

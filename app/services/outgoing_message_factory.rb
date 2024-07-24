@@ -5,7 +5,7 @@ class OutgoingMessageFactory
     payload = payload.with_indifferent_access
     case payload[:type]
     when 'template'
-      OutgoingMessages::TemplateOutgoingMessage.new(payload['template'])
+      OutgoingMessages::TemplateOutgoingMessage.new(payload)
     else
       raise ArgumentError, "Unknown message type: #{payload[:type]}"
     end

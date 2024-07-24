@@ -3,6 +3,7 @@
 class OutgoingMessage < ApplicationRecord
   belongs_to :organization
   belongs_to :channel
+  belongs_to :template, optional: true
 
   validates :payload, presence: true
 

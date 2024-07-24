@@ -9,4 +9,12 @@ class Template < ApplicationRecord
   validates :status, presence: true
   validates :callback_method, presence: true
   validates :callback_url, presence: true
+
+  before_create :generate_uuid
+
+  private
+
+  def generate_uuid
+    self.uuid = SecureRandom.uuid
+  end
 end

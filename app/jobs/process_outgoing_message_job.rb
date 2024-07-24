@@ -6,7 +6,8 @@ class ProcessOutgoingMessageJob < ApplicationJob
   def perform(outgoing_message_id)
     outgoing_message = OutgoingMessage.find(outgoing_message_id)
     channel = find_channel(outgoing_message)
-    send_message(channel, outgoing_message)
+    template = find_template(outgoing_message)
+    send_message(channel,template, outgoing_message)
 
     outgoing_message.provider_message_id = response
     outgoing_message.proccessed = true
@@ -27,6 +28,10 @@ class ProcessOutgoingMessageJob < ApplicationJob
     Channel.find(outgoing_message.channel_id)
   end
 
+  def find_template(outgoing_message)
+    outgoing_message.template_id ? Template.find(outgoing_message.template_id) : nil
+  end
+
   def create_provider_service(channel)
     MessagingProviderFactory.create(
       provider: channel.provider,
@@ -35,11 +40,22 @@ class ProcessOutgoingMessageJob < ApplicationJob
     )
   end
 
-  def send_message(channel, outgoing_message)
-    return unless outgoing_message.payload['type'] == 'template'
-
+  def send_message(channel, template, outgoing_message)
     translate_service = create_translate_service(outgoing_message)
     provider_service = create_provider_service(channel)
-    provider_service.send_message_from_template(translate_service.translate)
+
+    if outgoing_message.payload['type'] == 'template'
+      template_message(provider_service,translate_service)
+    else
+      simple_message(provider_service,translate_service, template)
+    end
+  end
+
+  def simple_message(provider_service, translate_service)
+    nil
+  end
+
+  def template_message(provider_service, translate_service, template)
+    provider_service.send_message_from_template(translate_service.translate(template.channel_code))
   end
 end

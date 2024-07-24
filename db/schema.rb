@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
   create_table "outgoing_messages", force: :cascade do |t|
     t.bigint "organization_id", null: false
     t.bigint "channel_id", null: false
+    t.bigint "template_id"
     t.string "uuid", null: false
     t.string "provider_message_id"
     t.jsonb "payload", null: false
@@ -64,6 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
     t.datetime "updated_at", null: false
     t.index ["channel_id"], name: "index_outgoing_messages_on_channel_id"
     t.index ["organization_id"], name: "index_outgoing_messages_on_organization_id"
+    t.index ["template_id"], name: "index_outgoing_messages_on_template_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -170,6 +172,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
   end
 
   create_table "templates", force: :cascade do |t|
+    t.string "uuid", null: false
     t.string "name", null: false
     t.string "content", null: false
     t.string "status", default: "draft", null: false
@@ -189,6 +192,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
   add_foreign_key "incoming_messages", "organizations"
   add_foreign_key "outgoing_messages", "channels"
   add_foreign_key "outgoing_messages", "organizations"
+  add_foreign_key "outgoing_messages", "templates"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
