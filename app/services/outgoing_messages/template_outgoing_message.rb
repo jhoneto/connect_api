@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class OutgoingMessages::TemplateOutgoingMessage < OutgoingMessages::BaseOutgoingMessage
-
   def translate
     TemplateMessageStruct.new(
       to: @payload[:to],

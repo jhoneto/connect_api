@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OutgoingMessage < ApplicationRecord
   belongs_to :organization
   belongs_to :channel
@@ -14,6 +16,6 @@ class OutgoingMessage < ApplicationRecord
   end
 
   def process_message
-    ProcessOutgoingMessageJob.perform_later(self.id)
+    ProcessOutgoingMessageJob.perform_later(id)
   end
 end

@@ -13,7 +13,6 @@ class Api::V1::OutgoingMessagesController < Api::V1::BaseController
     else
       render json: @message.errors, status: :unprocessable_entity
     end
-
   end
 
   private

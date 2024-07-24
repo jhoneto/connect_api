@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :outgoing_message do
     organization
     channel
-    payload { {type: 'text', text: 'Hello World'} }
+    payload { { type: 'text', text: 'Hello World' } }
     last_error { nil }
     proccessed { false }
   end
