@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_22_180853) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_180853) do
     t.string "api_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "outcoming_messages", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "channel_id", null: false
+    t.string "provider_message_id"
+    t.jsonb "payload", null: false
+    t.text "last_error"
+    t.boolean "proccessed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_outcoming_messages_on_channel_id"
+    t.index ["organization_id"], name: "index_outcoming_messages_on_organization_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -170,6 +183,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_180853) do
 
   add_foreign_key "channels", "organizations"
   add_foreign_key "incoming_messages", "organizations"
+  add_foreign_key "outcoming_messages", "channels"
+  add_foreign_key "outcoming_messages", "organizations"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
