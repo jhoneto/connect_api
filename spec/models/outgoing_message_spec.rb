@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OutcomingMessage, type: :model do
+RSpec.describe OutgoingMessage, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:organization) }
     it { is_expected.to belong_to(:channel) }
@@ -12,10 +12,10 @@ RSpec.describe OutcomingMessage, type: :model do
 
   describe 'callbacks' do
     describe 'before_create' do
-      let(:outcoming_message) { create(:outcoming_message) }
+      let(:outgoing_message) { create(:outgoing_message) }
 
       it 'generates a uuid' do
-        expect(outcoming_message.uuid).to be_present
+        expect(outgoing_message.uuid).to be_present
       end
     end
   end

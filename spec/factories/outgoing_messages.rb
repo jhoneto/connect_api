@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :outcoming_message do
+  factory :outgoing_message do
     organization
     channel
     payload { {type: 'text', text: 'Hello World'} }

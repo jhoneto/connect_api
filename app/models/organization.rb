@@ -3,6 +3,9 @@
 class Organization < ApplicationRecord
   validates :name, presence: true
 
+  has_many :outgoing_messages, dependent: :destroy
+  has_many :channels, dependent: :destroy
+
   before_create :generate_api_token
 
   private

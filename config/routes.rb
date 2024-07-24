@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :outgoing_messages, only: %i[ create ]
       namespace :webhook do
         resources :facebook_whatsapp, only: %i[ index create ]
       end
