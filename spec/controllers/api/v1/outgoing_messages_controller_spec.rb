@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::OutgoingMessagesController, type: :controller do
+  include ActiveJob::TestHelper
+
   let(:organization) { create(:organization) }
   let(:channel) { create(:channel, organization: organization) }
   let(:message) { create(:outgoing_message, channel: channel) }
@@ -22,15 +24,26 @@ RSpec.describe Api::V1::OutgoingMessagesController, type: :controller do
       end
       before do
         request.headers['api_token'] = organization.api_token
-        post :create, params: params, as: :json, format: :json
+      end
+
+      after do
+        clear_enqueued_jobs
+        clear_performed_jobs
       end
 
       it 'returns 201' do
+        post :create, params: params, as: :json, format: :json
         expect(response).to have_http_status(:created)
       end
 
       it 'creates a new outgoing message' do
-        expect(OutgoingMessage.count).to eq(1)
+        expect {post :create, params: params, as: :json, format: :json}.to change {OutgoingMessage.count}.by(1)
+      end
+
+      it 'enqueues a job' do
+        expect {
+          post :create, params: params, as: :json, format: :json
+        }.to have_enqueued_job(ProcessOutgoingMessageJob).with(kind_of(Integer))
       end
     end
 
