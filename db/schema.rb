@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
   create_table "outcoming_messages", force: :cascade do |t|
     t.bigint "organization_id", null: false
     t.bigint "channel_id", null: false
+    t.string "uuid", null: false
     t.string "provider_message_id"
     t.jsonb "payload", null: false
     t.text "last_error"
