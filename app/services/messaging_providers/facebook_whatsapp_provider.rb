@@ -11,10 +11,12 @@ class MessagingProviders::FacebookWhatsappProvider < MessagingProviders::BasePro
       body: template_body(template_message).to_json
     }
 
-    HTTParty.post(
+    response = HTTParty.post(
       "#{URL}/#{@config[:facebook_whatsapp_number]}/messages",
       req_body
     )
+
+    read_response(response)['messages'][0]['id']
   end
 
   private

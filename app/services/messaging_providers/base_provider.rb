@@ -10,4 +10,12 @@ class MessagingProviders::BaseProvider
   def send_message_from_template(params)
     raise NotImplementedError
   end
+
+  private
+
+  def read_response(response)
+    raise StandardError, response.body unless response.success?
+
+    JSON.parse(response.body)
+  end
 end

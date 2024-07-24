@@ -3,7 +3,39 @@
 class ProcessOutgoingMessageJob < ApplicationJob
   queue_as :outgoing_message
 
-  def perform(message_id)
+  def perform(outgoing_message_id)
+    outgoing_message = OutgoingMessage.find(outgoing_message_id)
+    translate_service = create_translate_service(outgoing_message)
 
+    channel = find_channel(outgoing_message)
+
+    provider_service = create_provider_service(channel)
+    response = provider_service.send_message_from_template(translate_service.translate) if outgoing_message.payload['type'] == 'template'
+
+    outgoing_message.provider_message_id = response
+    outgoing_message.proccessed = true
+    outgoing_message.sended_at = Time.now
+    outgoing_message.save!
+  rescue StandardError => e
+    outgoing_message.last_error = e.message
+    outgoing_message.save!
+  end
+
+  private
+
+  def create_translate_service(outgoing_message)
+    OutgoingMessageFactory.create(outgoing_message.payload)
+  end
+
+  def find_channel(outgoing_message)
+    Channel.find(outgoing_message.channel_id)
+  end
+
+  def create_provider_service(channel)
+    MessagingProviderFactory.create(
+      provider: channel.provider,
+      channel_type: channel.channel_type,
+      config: channel.config
+    )
   end
 end

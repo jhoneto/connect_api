@@ -22,7 +22,7 @@ Channel.create!(
   callback_headers: { 'Content-Type' => 'application/json' },
   provider: 'facebook',
   channel_type: 'whatsapp',
-  config: { 'facebook_api_token' => 'EAALCdFq7IWIBO3fTrbkDEj6ZCgpno9YeOG0emmvaYvMkp2f8eSPAzTC9j9jmHZCgcA3ESGUmU3dgy8U86WC0bWYNeTZA2sZC9EhwQ5t4xv6u94hjZBjClK5P7VJJXMokbmuPWv3MuzLOs4ZAFlXbuoo99LWRapvbzPAHZA5EJasqkuXo4mRmGfGsEyZBAVaAkMSRq830sHJSBUVNh4dRjLjnTX3OP74ZD',
+  config: { 'facebook_api_token' => 'EAALCdFq7IWIBO2eqZCMIr0nxAEwZBZBn0EwJYC3gpfKvHrND631lChcGJHdnBYgENjZCyE6uXufsax2kVzgrU9RizoaEaSQ2wDcunW8KAYeYd3Doh9fzdygTQsqMQUn8ZCd6tLozsEVXCEAOKwAlWbzEZAST9Sw56ZA8EzjqahVccU3DM5Pa0VQMh7xMn4zFDYHCT1dIITbnTa3k7mLGwZBPQXPykLgZD',
             'facebook_whatsapp_number' => '220835044450225'
           }
 )
