@@ -24,6 +24,9 @@ RSpec.describe ProcessOutgoingMessageJob, type: :job do
       clear_enqueued_jobs
       clear_performed_jobs
 
+      stub_request(:post, "https://graph.facebook.com/v17.0/#{channel.config['facebook_whatsapp_number']}/messages").to_return(status: 200, body: {"messages": [{"id": "xyz"}]}.to_json)
+      #with(body: {"messages": [{"id": "xyz"}]}, headers: { 'Content-Length' => 3 })
+
       create(:outgoing_message, organization: orgazation, channel: channel, template: template, payload: template_payload)
     end
 
@@ -31,7 +34,6 @@ RSpec.describe ProcessOutgoingMessageJob, type: :job do
       it 'should send the message to the provider' do
         perform_enqueued_jobs
 
-        byebug
         expect(OutgoingMessage.last.processed).to be_truthy
       end
     end

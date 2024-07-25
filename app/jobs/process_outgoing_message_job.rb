@@ -7,8 +7,7 @@ class ProcessOutgoingMessageJob < ApplicationJob
     outgoing_message = OutgoingMessage.find(outgoing_message_id)
     channel = find_channel(outgoing_message)
     template = find_template(outgoing_message)
-    byebug
-    send_message(channel, template, outgoing_message)
+    response =send_message(channel, template, outgoing_message)
 
     outgoing_message.provider_message_id = response
     outgoing_message.processed = true
@@ -42,7 +41,6 @@ class ProcessOutgoingMessageJob < ApplicationJob
   end
 
   def send_message(channel, template, outgoing_message)
-    byebug
     translate_service = create_translate_service(outgoing_message)
     provider_service = create_provider_service(channel)
 

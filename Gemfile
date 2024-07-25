@@ -75,6 +75,7 @@ group :test do
 
   gem 'shoulda-matchers', '~> 6.2'
   gem 'simplecov', '~> 0.22.0'
+  gem 'webmock', '~> 3.23', '>= 3.23.1'
 end
 
 # gem 'devise', '~> 4.9', '>= 4.9.4'

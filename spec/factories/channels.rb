@@ -7,6 +7,7 @@ FactoryBot.define do
     channel_type { 'whatsapp' }
     callback_url { 'https://example.com' }
     callback_method { 'POST' }
+    config { {"facebook_whatsapp_number": "551199999999", "facebook_api_token": "abc"} }
     organization
   end
 end
