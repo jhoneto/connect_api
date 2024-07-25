@@ -7,7 +7,7 @@ class CreateIncomingMessages < ActiveRecord::Migration[7.1]
       t.jsonb      :payload, null: false
       t.jsonb      :channel_infos, null: false
       t.text       :last_error
-      t.boolean    :proccessed, default: false
+      t.boolean    :processed, default: false
       t.timestamps
     end
   end

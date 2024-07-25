@@ -6,6 +6,6 @@ FactoryBot.define do
     channel
     payload { { type: 'text', text: 'Hello World' } }
     last_error { nil }
-    proccessed { false }
+    processed { false }
   end
 end

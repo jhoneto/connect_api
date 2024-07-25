@@ -8,7 +8,7 @@ class CreateOutgoingMessages < ActiveRecord::Migration[7.0]
       t.string     :provider_message_id
       t.jsonb      :payload, null: false
       t.text       :last_error
-      t.boolean    :proccessed, default: false
+      t.boolean    :processed, default: false
       t.datetime   :sended_at
       t.datetime   :delivered_at
       t.datetime   :read_at

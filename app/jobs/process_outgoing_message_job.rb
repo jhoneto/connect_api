@@ -7,10 +7,11 @@ class ProcessOutgoingMessageJob < ApplicationJob
     outgoing_message = OutgoingMessage.find(outgoing_message_id)
     channel = find_channel(outgoing_message)
     template = find_template(outgoing_message)
-    send_message(channel,template, outgoing_message)
+    byebug
+    send_message(channel, template, outgoing_message)
 
     outgoing_message.provider_message_id = response
-    outgoing_message.proccessed = true
+    outgoing_message.processed = true
     outgoing_message.sended_at = Time.zone.now
     outgoing_message.save!
   rescue StandardError => e
@@ -41,13 +42,14 @@ class ProcessOutgoingMessageJob < ApplicationJob
   end
 
   def send_message(channel, template, outgoing_message)
+    byebug
     translate_service = create_translate_service(outgoing_message)
     provider_service = create_provider_service(channel)
 
     if outgoing_message.payload['type'] == 'template'
-      template_message(provider_service,translate_service)
+      template_message(provider_service,translate_service, template)
     else
-      simple_message(provider_service,translate_service, template)
+      simple_message(provider_service,translate_service)
     end
   end
 

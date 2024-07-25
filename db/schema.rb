@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
     t.jsonb "payload", null: false
     t.jsonb "channel_infos", null: false
     t.text "last_error"
-    t.boolean "proccessed", default: false
+    t.boolean "processed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_incoming_messages_on_organization_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
     t.string "provider_message_id"
     t.jsonb "payload", null: false
     t.text "last_error"
-    t.boolean "proccessed", default: false
+    t.boolean "processed", default: false
     t.datetime "sended_at"
     t.datetime "delivered_at"
     t.datetime "read_at"

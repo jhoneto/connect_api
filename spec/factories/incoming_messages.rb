@@ -8,6 +8,6 @@ FactoryBot.define do
     payload { {} }
     channel_infos { {} }
     last_error { nil }
-    proccessed { false }
+    processed { false }
   end
 end
