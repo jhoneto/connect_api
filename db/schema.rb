@@ -177,9 +177,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
     t.string "content", null: false
     t.string "status", default: "draft", null: false
     t.string "channel_code"
-    t.string "callback_method", null: false
-    t.string "callback_url", null: false
-    t.jsonb "callback_headers", default: {}, null: false
+    t.string "callback_method"
+    t.string "callback_url"
+    t.jsonb "callback_headers", default: {}
     t.bigint "channel_id", null: false
     t.bigint "organization_id", null: false
     t.datetime "created_at", null: false

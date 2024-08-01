@@ -12,8 +12,6 @@ RSpec.describe Template, type: :model do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to validate_presence_of(:status) }
-    it { is_expected.to validate_presence_of(:callback_method) }
-    it { is_expected.to validate_presence_of(:callback_url) }
   end
 
   describe 'callbacks' do

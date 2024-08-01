@@ -6,9 +6,9 @@ class CreateTemplates < ActiveRecord::Migration[7.1]
       t.string :content, null: false
       t.string :status, null: false, default: 'draft'
       t.string :channel_code
-      t.string :callback_method, null: false
-      t.string :callback_url, null: false
-      t.jsonb  :callback_headers, default: {}, null: false
+      t.string :callback_method
+      t.string :callback_url
+      t.jsonb  :callback_headers, default: {}
       t.references :channel, null: false, foreign_key: true
       t.references :organization, null: false, foreign_key: true
       t.timestamps

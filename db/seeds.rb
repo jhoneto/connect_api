@@ -22,8 +22,8 @@ Channel.create!(
   callback_headers: { 'Content-Type' => 'application/json' },
   provider: 'facebook',
   channel_type: 'whatsapp',
-  config: { 'facebook_api_token' => '',
-            'facebook_whatsapp_number' => ''
+  config: { 'facebook_api_token' => 'EAALCdFq7IWIBO3Jf4bZCbtJJ2ZCq3gIHHKuKijwVpyg3bfZCv3BLdykqDQu9sX3hWh8622YESyEKLxf53D7BhgYZBvecniqDy6cZCpFQfOb4yO7fgLelR8uFyTH2FdLmjIDyIHIZC9uTRAeSeFFRAIRsmNswWMDUCvkycjUG6NTA92sCjmlcBVi9NHQG9GiWkFXgasFSzMZBh9DTmXKrHlKJpFT4QQZD',
+            'facebook_whatsapp_number' => '220835044450225'
           }
 )
 

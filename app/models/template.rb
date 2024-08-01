@@ -7,8 +7,6 @@ class Template < ApplicationRecord
   validates :name, presence: true
   validates :content, presence: true
   validates :status, presence: true
-  validates :callback_method, presence: true
-  validates :callback_url, presence: true
 
   before_create :generate_uuid
 
