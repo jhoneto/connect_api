@@ -24,7 +24,7 @@ RSpec.describe Api::V1::OutgoingMessagesController, type: :controller do
       end
 
       before do
-        request.headers['api_token'] = organization.api_token
+        request.headers['Api-Token'] = organization.api_token
       end
 
       after do
@@ -62,7 +62,7 @@ RSpec.describe Api::V1::OutgoingMessagesController, type: :controller do
       end
 
       before do
-        request.headers['api_token'] = organization.api_token
+        request.headers['Api-Token'] = organization.api_token
         post :create, params:, as: :json, format: :json
       end
 

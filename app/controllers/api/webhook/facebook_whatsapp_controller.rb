@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::Webhook::FacebookWhatsappController < Api::V1::Webhook::BaseController
+class Api::Webhook::FacebookWhatsappController < Api::Webhook::BaseController
   def index
     render plain: params['hub.challenge'], status: :ok if !current_organization.nil? && params['hub.mode']
   end
@@ -13,6 +13,10 @@ class Api::V1::Webhook::FacebookWhatsappController < Api::V1::Webhook::BaseContr
       payload: params[:facebook_whatsapp]
     )
 
+    head :ok
+  rescue StandardError => e
+    puts e.message
+    puts e.backtrace
     head :ok
   end
 end

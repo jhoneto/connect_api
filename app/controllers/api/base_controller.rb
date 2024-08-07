@@ -14,6 +14,7 @@ class Api::BaseController < ActionController::API
   end
 
   def render_generic_error_response(exception)
+    puts exception.backtrace
     render json: { error: exception.message }, status: :internal_server_error
   end
 end

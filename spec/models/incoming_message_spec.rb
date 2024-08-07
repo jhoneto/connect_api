@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe IncomingMessage, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:payload) }
-    it { is_expected.to validate_presence_of(:channel_infos) }
     it { is_expected.to validate_presence_of(:provider) }
     it { is_expected.to validate_presence_of(:channel_type) }
   end

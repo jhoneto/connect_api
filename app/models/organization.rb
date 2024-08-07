@@ -5,6 +5,7 @@ class Organization < ApplicationRecord
 
   has_many :outgoing_messages, dependent: :destroy
   has_many :channels, dependent: :destroy
+  has_many :templates, dependent: :destroy
 
   before_create :generate_api_token
 

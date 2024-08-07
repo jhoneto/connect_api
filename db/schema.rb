@@ -34,7 +34,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_001816) do
     t.string "provider", null: false
     t.string "channel_type", null: false
     t.jsonb "payload", null: false
-    t.jsonb "channel_infos", null: false
     t.text "last_error"
     t.boolean "processed", default: false
     t.datetime "created_at", null: false

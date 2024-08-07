@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-class Api::V1::BaseController < Api::BaseController
+class Api::Webhook::BaseController < Api::BaseController
   before_action :require_organization_access_token
 
   private
 
   def require_organization_access_token
-    token = params[:api_token] || request.headers['Api-Token']
+    token = params[:access_token]
     head :forbidden unless token
     head :forbidden unless valid_token(token)
   end
 
   def current_organization
-    token = params[:api_token] || request.headers['Api-Token']
+    token = params[:access_token]
     Organization.find_by(api_token: token)
   end
 

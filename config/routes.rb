@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   namespace :api do
+    namespace :webhook do
+      resources :facebook_whatsapp, only: %i[ index create ]
+    end
     namespace :v1 do
       resources :outgoing_messages, only: %i[ create ]
-      namespace :webhook do
-        resources :facebook_whatsapp, only: %i[ index create ]
-      end
     end
   end
 end
