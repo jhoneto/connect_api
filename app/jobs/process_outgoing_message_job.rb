@@ -11,7 +11,7 @@ class ProcessOutgoingMessageJob < ApplicationJob
 
     outgoing_message.provider_message_id = response
     outgoing_message.processed = true
-    outgoing_message.sended_at = Time.zone.now
+    #outgoing_message.sended_at = Time.zone.now
     outgoing_message.save!
   rescue StandardError => e
     outgoing_message.last_error = e.message

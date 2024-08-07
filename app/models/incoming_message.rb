@@ -10,4 +10,12 @@ class IncomingMessage < ApplicationRecord
   # validates :channel_infos, presence: true
   validates :provider, presence: true, inclusion: { in: providers.keys }
   validates :channel_type, presence: true, inclusion: { in: channel_types.keys }
+
+  before_create :generate_uuid
+
+  private
+
+  def generate_uuid
+    self.uuid = "in-#{SecureRandom.hex(10)}"
+  end
 end
