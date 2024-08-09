@@ -3,12 +3,13 @@
 class StandardizedMessageStruct < BaseStruct
   attribute :event, Types::String
 
-  attribute :from do
+  attribute? :from do
     attribute :name, Types::String
     attribute :identifier, Types::String
   end
 
   attribute? :status do
+    attribute :provider_message_id, Types::String
     attribute :name, Types::String
     attribute :timestamp, Types::Integer
   end

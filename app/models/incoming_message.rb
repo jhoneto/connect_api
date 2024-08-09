@@ -12,10 +12,15 @@ class IncomingMessage < ApplicationRecord
   validates :channel_type, presence: true, inclusion: { in: channel_types.keys }
 
   before_create :generate_uuid
+  after_create :process_message
 
   private
 
   def generate_uuid
     self.uuid = "in-#{SecureRandom.hex(10)}"
+  end
+
+  def process_message
+    ProcessIncomingMessageJob.perform_later(id)
   end
 end

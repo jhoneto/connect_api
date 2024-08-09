@@ -6,7 +6,6 @@ FactoryBot.define do
     provider { 'facebook' }
     channel_type { 'whatsapp' }
     payload { {} }
-    channel_infos { {} }
     last_error { nil }
     processed { false }
   end

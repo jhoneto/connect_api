@@ -4,6 +4,19 @@ require 'rails_helper'
 
 RSpec.describe StandardizedMessageStruct do
   describe 'validations' do
+    context 'when is a valid message' do
+      let(:params) do
+        {
+          event: 'message'
+        }
+      end
+
+      it 'is valid' do
+        result = described_class.new(params)
+        expect(result.event).to eq('message')
+      end
+    end
+
     context 'when missing event attributes' do
       let(:params) do
         { from: {name: 'Hamilton', identifier: '123154'} }
