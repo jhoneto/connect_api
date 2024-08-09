@@ -47,6 +47,10 @@ RSpec.describe ProcessIncomingMessageJob, type: :job do
 
         expect(outgoing_message.read_at).to_not be_nil
       end
+
+      it 'notification should be sent' do
+        expect(Notification::OutgoingMessageStatusChangedJob).to have_been_enqueued.with(outgoing_message.id, 'read', 1676903200)
+      end
     end
   end
 
