@@ -7,10 +7,13 @@ class ProcessIncomingMessageJob < ApplicationJob
     incoming_message = IncomingMessage.find(incoming_message_id)
     translated_message = process_incoming_message(incoming_message)
 
-    process_status_message(translated_message) if translated_message.event  == 'status'
+    provider_message_id = if translated_message.event  == 'status'
+                            process_status_event(translated_message)
+                          else
+                            process_message_event()
+                          end
 
-    incoming_message.update(processed: true)
-
+    incoming_message.update(provider_message_id: provider_message_id, processed: true)
   end
 
   private
@@ -25,7 +28,7 @@ class ProcessIncomingMessageJob < ApplicationJob
     factory.translate
   end
 
-  def process_status_message(message)
+  def process_status_event(message)
     outgoing_message = OutgoingMessage.find_by(provider_message_id: message.status.provider_message_id)
 
     return if outgoing_message.blank?
@@ -38,6 +41,13 @@ class ProcessIncomingMessageJob < ApplicationJob
     when :delivered
       outgoing_message.update(delivered_at: DateTime.strptime(message.status.timestamp.to_s, '%s'))
     end
+
+    Notification::OutgoingMessageStatusChangedJob.perform_later(outgoing_message.id, message.status.name, message.status.timestamp)
+    outgoing_message.provider_message_id
+  end
+
+  def process_message_event()
+    # TODO: implement
   end
 
   def notify_status_change(outgoing_message)

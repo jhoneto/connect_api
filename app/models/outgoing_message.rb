@@ -10,6 +10,18 @@ class OutgoingMessage < ApplicationRecord
   before_create :generate_uuid
   after_create :process_message
 
+  def method
+    template.callback_method || channel.callback_method
+  end
+
+  def url
+    template.callback_url || channel.callback_url
+  end
+
+  def headers
+    template.callback_headers || channel.callback_headers
+  end
+
   private
 
   def generate_uuid
